@@ -1,5 +1,7 @@
+/// <reference path="../typings/tsd.d.ts" />
+
 (function(jQuery){
-  jQuery.fn.spriteanimation = function( type, settings){
+  jQuery.fn.tileanimation = function( type, settings){
 
     var options = jQuery.extend({
       width: 0,
@@ -14,13 +16,13 @@
     }, settings);
 
     return this.each(function(){
-      var t$ = $(this);
+      var t$ = jQuery(this);
       
       if(type === "init"){
         t$.data("spanim", jQuery.extend({}, options));
       }else if( type === "to"){
         var data = t$.data("spanim");
-        t$.spriteanimation("stop");
+        t$.tileanimation("stop");
         var direction = settings.direction || 0;
         var frametime = settings.frametime || 1;
         var currentFrameCount = frametime;
@@ -35,26 +37,35 @@
 
         data.offset = (data.offset + data.frame + data.maxframe) % data.maxframe || 0;
 
-        function rotateTo(){
-          currentFrameCount -= 1;
-          if( currentFrameCount === 0){
-            currentFrameCount = frametime;
-            var frame = data.frame + direction;
-            if( data.reverse ){
-              frame = data.maxframe - frame;
-            }
-            frame = (frame + data.maxframe) % data.maxframe;
-            t$.spriteanimation(frame, true);
-            if( rotateTo.playing && frame !== settings.to){
-              requestAnimationFrame(rotateTo);
+        //rotateTo interface
+        var rotateTo: {
+          ():any;
+          playing: Boolean;
+        };
+
+        rotateTo = (() => {
+          var _f: any = function(){
+            currentFrameCount -= 1;
+            if( currentFrameCount === 0){
+              currentFrameCount = frametime;
+              var frame = data.frame + direction;
+              if( data.reverse ){
+                frame = data.maxframe - frame;
+              }
+              frame = (frame + data.maxframe) % data.maxframe;
+              t$.tileanimation(frame, true);
+              if( rotateTo.playing && frame !== settings.to){
+                requestAnimationFrame(rotateTo);
+              }else{
+                rotateTo.playing = false;
+                t$.trigger("animationStop");
+              }
             }else{
-              rotateTo.playing = false;
-              t$.trigger("animationStop");
+              requestAnimationFrame(rotateTo);
             }
-          }else{
-            requestAnimationFrame(rotateTo);
-          }
-        }
+          };
+          return _f;
+        })();
 
         rotateTo.playing = true;
         rotateTo();
@@ -63,7 +74,7 @@
 
       }else if( type === "stop"){
         var data = t$.data("spanim");
-        if( $.isFunction( data.currentAnimation )){
+        if( jQuery.isFunction( data.currentAnimation )){
           data.currentAnimation.playing = false;
           data.currentAnimation = void 0;
         }
