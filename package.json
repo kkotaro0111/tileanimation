@@ -1,5 +1,5 @@
 {
-  "name": "spriteanimation",
+  "name": "tileanimation",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/kkotaro0111/spriteanimation.git"
+    "url": "git://github.com/kkotaro0111/tileanimation.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kkotaro0111/spriteanimation/issues"
+    "url": "https://github.com/kkotaro0111/tileanimation/issues"
   },
-  "homepage": "https://github.com/kkotaro0111/spriteanimation",
+  "homepage": "https://github.com/kkotaro0111/tileanimation",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-typescript": "~0.3.6",
