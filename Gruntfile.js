@@ -17,6 +17,10 @@ module.exports = function(grunt) {
         options:{
         }
       },
+      uglify:{
+        files:['src/jquery.<%=pkg.name%>.js'],
+        tasks:['newer:uglify']
+      },
     },
     typescript: {
       base: {
@@ -29,18 +33,26 @@ module.exports = function(grunt) {
     },
     jshint: {
       base:{
-        src:['src/*.js'],
+        src:['src/jquery.<%= pkg.name %>.js'],
+      }
+    },
+    uglify: {
+      base: {
+        files:{
+          "src/jquery.<%= pkg.name %>.min.js":[ "src/jquery.<%= pkg.name %>.js"]
+        }
       }
     },
   });
 
   // Load the plugin that provides the "uglify" task.
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-typescript');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-newer');
 
   // Default task(s).
-  grunt.registerTask('default', ['watch']);
+  grunt.registerTask('default', ['typescript', 'jshint', 'uglify', 'watch']);
 
 };
