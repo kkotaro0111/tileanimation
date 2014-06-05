@@ -2,7 +2,7 @@
   "name": "tileanimation",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "jquery.tileanimation.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git://github.com/kkotaro0111/tileanimation.git"
   },
-  "author": "",
+  "author": "kkotaro0111",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/kkotaro0111/tileanimation/issues"
