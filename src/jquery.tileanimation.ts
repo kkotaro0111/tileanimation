@@ -1,5 +1,9 @@
 /// <reference path="../typings/tsd.d.ts" />
 
+/*! jQuery Tile Animation - v1.0.0 - 2014-06-05
+  * http://github.com/kkotaro0111/tileanimation
+  * Copyright 2014 kkotaro0111 and other contributors; Licensed ISC */
+
 (function(jQuery){
   jQuery.fn.tileanimation = function( type, settings){
 

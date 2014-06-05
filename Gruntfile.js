@@ -40,6 +40,9 @@ module.exports = function(grunt) {
       base: {
         files:{
           "src/jquery.<%= pkg.name %>.min.js":[ "src/jquery.<%= pkg.name %>.js"]
+        },
+        options:{
+          preserveComments: "some"
         }
       }
     },
