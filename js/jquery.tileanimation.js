@@ -1,4 +1,7 @@
 /// <reference path="../typings/tsd.d.ts" />
+/*! jQuery Tile Animation - v1.0.0 - 2014-06-05
+* http://github.com/kkotaro0111/tileanimation
+* Copyright 2014 kkotaro0111 and other contributors; Licensed ISC */
 (function (jQuery) {
     jQuery.fn.tileanimation = function (type, settings) {
         var options = jQuery.extend({
@@ -15,11 +18,12 @@
 
         return this.each(function () {
             var t$ = jQuery(this);
+            var data;
 
             if (type === "init") {
                 t$.data("spanim", jQuery.extend({}, options));
             } else if (type === "to") {
-                var data = t$.data("spanim");
+                data = t$.data("spanim");
                 t$.tileanimation("stop");
                 var direction = settings.direction || 0;
                 var frametime = settings.frametime || 1;
@@ -67,13 +71,13 @@
 
                 data.currentAnimation = rotateTo;
             } else if (type === "stop") {
-                var data = t$.data("spanim");
+                data = t$.data("spanim");
                 if (jQuery.isFunction(data.currentAnimation)) {
                     data.currentAnimation.playing = false;
                     data.currentAnimation = void 0;
                 }
             } else if (jQuery.isNumeric(type)) {
-                var data = t$.data("spanim");
+                data = t$.data("spanim");
                 var offset = (settings ? 0 : data.reverse ? data.maxframe - data.offset : data.offset) || 0;
                 var frame = ((type << 0) % data.maxframe) - offset;
                 if (data.reverse) {
